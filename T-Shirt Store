@@ -1,0 +1,23 @@
+ .gitignore                                       |  12 [32m++[m
+ README.md                                        | 105 [32m+++++++++++++++++[m
+ client/.env.example                              |   1 [32m+[m
+ client/index.html                                |  11 [32m++[m
+ client/package.json                              |  19 [32m++++[m
+ client/src/App.jsx                               | 138 [32m+++++++++++++++++++++++[m
+ client/src/main.jsx                              |   5 [32m+[m
+ client/src/style.css                             |   2 [32m+[m
+ client/vite.config.js                            |   3 [32m+[m
+ docker-compose.yml                               |  22 [32m++++[m
+ package.json                                     |  14 [32m+++[m
+ server/.env.example                              |   3 [32m+[m
+ server/Dockerfile                                |   7 [32m++[m
+ server/package.json                              |  21 [32m++++[m
+ server/src/index.js                              |  33 [32m++++++[m
+ server/src/migrate.js                            |  24 [32m++++[m
+ server/src/migrations/001_add_product_indexes.js |   8 [32m++[m
+ server/src/models/Order.js                       |  22 [32m++++[m
+ server/src/models/Product.js                     |  15 [32m+++[m
+ server/src/routes/orders.js                      |  52 [32m+++++++++[m
+ server/src/routes/products.js                    |  26 [32m+++++[m
+ server/src/seed.js                               |  24 [32m++++[m
+ 22 files changed, 567 insertions(+)
