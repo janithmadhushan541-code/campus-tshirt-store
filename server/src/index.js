@@ -5,6 +5,7 @@ import morgan from 'morgan';
 import mongoose from 'mongoose';
 import productRoutes from './routes/products.js';
 import orderRoutes from './routes/orders.js';
+import adminRoutes from './routes/admin.js';
 
 const app = express();
 app.use(cors({ origin: process.env.CLIENT_ORIGIN || 'http://localhost:5173' }));
@@ -16,6 +17,7 @@ app.get('/api/health', (_req, res) => {
 });
 app.use('/api/products', productRoutes);
 app.use('/api/orders', orderRoutes);
+app.use('/api/admin', adminRoutes);
 app.use((req, res) => res.status(404).json({ message: `Route not found: ${req.method} ${req.path}` }));
 app.use((err, _req, res, _next) => {
   console.error(err);
