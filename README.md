@@ -68,6 +68,14 @@ npm run dev
 - API: http://localhost:5000/api
 - Health check: http://localhost:5000/api/health
 
+## Admin dashboard
+
+1. Add a unique password of at least 16 characters as `ADMIN_PASSWORD` in `server/.env`.
+2. Restart the server and open [Admin dashboard](http://localhost:5173/admin).
+3. Sign in to see store totals and low-stock counts, search orders and update fulfilment status, or add and edit products.
+
+Admin sessions expire after eight hours or when the API restarts. Refreshing the admin page requires signing in again. If you cancel an order, review the stock and adjust it in Products if the items are available for sale again.
+
 ## Main API endpoints
 - `GET /api/health` — health status
 - `GET /api/products` — product list (supports `?search=` and `?category=`)
@@ -77,7 +85,6 @@ npm run dev
 
 ## Suggested development roadmap
 1. Add registration/login with hashed passwords and secure sessions/JWT.
-2. Add an admin dashboard for products, stock, orders, and order status.
 3. Add order tracking and email confirmations.
 4. Integrate a trusted payment gateway (never store raw card details).
 5. Add image uploads through Cloudinary or S3 rather than saving images on the server.
