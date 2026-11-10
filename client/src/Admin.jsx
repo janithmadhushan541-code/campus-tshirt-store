@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 import { ArrowLeft, ClipboardList, LayoutDashboard, LogOut, Package, Plus, RefreshCw, ShieldCheck } from 'lucide-react';
 import './admin.css';
+import { API_BASE_URL } from './api.js';
 
-const api = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const statuses = ['Pending', 'Confirmed', 'Printing', 'Ready', 'Delivered', 'Cancelled'];
 const categories = ['Campus', 'Sports', 'Event', 'Accessories'];
 const currency = new Intl.NumberFormat('en-LK', { style: 'currency', currency: 'LKR' });
@@ -10,7 +10,7 @@ const money = value => currency.format(value);
 const emptyProduct = { name: '', description: '', category: 'Campus', image: '', sizes: 'S, M, L, XL', stock: '', price: '', featured: false };
 
 async function request(path, token, options = {}) {
-  const response = await fetch(`${api}/admin${path}`, {
+  const response = await fetch(`${API_BASE_URL}/admin${path}`, {
     method: options.method,
     signal: options.signal,
     headers: {

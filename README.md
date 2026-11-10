@@ -24,28 +24,31 @@ A beginner-friendly starter for a campus T-shirt ordering platform built with Mo
 - npm
 - MongoDB Community Server, OR Docker Desktop
 
-## 1. Start MongoDB
+## 1. Choose how to run the app
 ### Option A — local MongoDB
 Install and start MongoDB Community Server. The default URI in `server/.env.example` is:
 `mongodb://127.0.0.1:27017/campus_tee_store`
 
-Copy `server/.env.example` to `server/.env`.
+Use this option to run the client and server directly with Node.js. Copy `server/.env.example` to `server/.env`.
 
-### Option B — Docker
-From the project root:
+### Option B — Docker Compose
+Docker Compose builds and runs the client, server, and MongoDB as separate containers. From the project root:
 ```bash
-docker compose up -d mongo
+docker compose up --build
 ```
-Then copy `server/.env.example` to `server/.env`.
+
+The client is available at `http://localhost:5173`, and the API at `http://localhost:5000/api`. The client container proxies `/api` requests to the server container. To enable admin login, set `ADMIN_PASSWORD` in the shell before starting Compose.
 
 ## 2. Install dependencies
-Open a terminal in the project root:
+For local development with Node.js, open a terminal in the project root:
 ```bash
 npm install
 npm run install:all
 ```
+Skip this step if you are using only Docker Compose.
 
 ## 3. Configure environment
+For local development with Node.js, copy these example files:
 Copy `server/.env.example` to `server/.env`.
 Copy `client/.env.example` to `client/.env`.
 
@@ -54,13 +57,23 @@ On Windows PowerShell:
 Copy-Item server/.env.example server/.env
 Copy-Item client/.env.example client/.env
 ```
+Skip this step if you are using only Docker Compose.
 
 ## 4. Add sample products
+For local development with Node.js:
 ```bash
 npm run seed
 ```
 
+For Docker Compose, start the services first, then run:
+```bash
+docker compose exec server npm run seed
+```
+
 ## 5. Run the website
+For Docker Compose, run `docker compose up --build` from the project root.
+
+For local development with Node.js:
 ```bash
 npm run dev
 ```

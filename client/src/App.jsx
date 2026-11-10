@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useState } from 'react';
 import { ShoppingBag, Search, Shirt, Menu, X, Plus, Minus, Trash2, CheckCircle2, ArrowRight, Heart, Truck, ShieldCheck, PackageCheck } from 'lucide-react';
+import { API_BASE_URL } from './api.js';
 
-const API = import.meta.env.VITE_API_URL || 'http://localhost:5000/api';
 const money = (value) => `LKR ${Number(value || 0).toLocaleString('en-LK')}`;
 const categories = ['All', 'Campus', 'Sports', 'Event', 'Accessories'];
 
@@ -25,7 +25,7 @@ export default function App() {
     async function loadProducts() {
       setLoading(true); setError('');
       try {
-        const response = await fetch(`${API}/products`, { signal: controller.signal });
+        const response = await fetch(`${API_BASE_URL}/products`, { signal: controller.signal });
         if (!response.ok) throw new Error('Could not load products. Is the API running?');
         setProducts(await response.json());
       } catch (err) { if (err.name !== 'AbortError') setError(err.message); }
@@ -60,14 +60,14 @@ export default function App() {
   async function placeOrder(event) {
     event.preventDefault(); setError('');
     try {
-      const response = await fetch(`${API}/orders`, {
+      const response = await fetch(`${API_BASE_URL}/orders`, {
         method: 'POST', headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ customer, items: cart.map(({ productId, size, quantity }) => ({ productId, size, quantity })) })
       });
       const data = await response.json();
       if (!response.ok) throw new Error(data.message || 'Could not place your order.');
       setSuccess(data); setCart([]); setCheckoutOpen(false); setCartOpen(false);
-      const refreshed = await fetch(`${API}/products`);
+      const refreshed = await fetch(`${API_BASE_URL}/products`);
       if (refreshed.ok) setProducts(await refreshed.json());
     } catch (err) { setError(err.message); }
   }
